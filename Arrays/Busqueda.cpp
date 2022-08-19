@@ -38,7 +38,7 @@ int main(void){
 	
 	int aux = 0;
 	
-	while ((aux<numElementos) && (elementoBusqueda != arreglo[aux])){
+	while ((aux<=numElementos) && (elementoBusqueda != arreglo[aux])){
         aux++;
     }
 

@@ -36,19 +36,19 @@ int main(void){
 	cout<<"Dígite el elemento a modificar"<<endl;
 	cin>>elementoModificar;
 	
-	int aux = 0;
+	int indiceAux = 0;
 	
-	while ((aux<numElementos) && (elementoModificar != arreglo[aux])){
-        aux++;
+	while ((indiceAux<=numElementos) && (elementoModificar != arreglo[indiceAux])){
+        indiceAux++;
     }
 
 
-    if (aux > numElementos){
+    if (indiceAux > numElementos){
         cout << "No se encontro el elemento"<<endl;
     } else {
-    	cout<<"Ingrese el elemento nuevo para la posición "<<aux<<" "<<endl;
+    	cout<<"Ingrese el elemento nuevo para la posición "<<indiceAux<<" "<<endl;
     	cin>>elementoReemplazo;
-    	arreglo[aux] = elementoReemplazo; 
+    	arreglo[indiceAux] = elementoReemplazo; 
     	
 	}
 

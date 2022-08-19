@@ -1,8 +1,4 @@
-/*
-•Eliminar un elemento en un arreglo unidimensional desordenado
 
-•Modificar un elemento en un arreglo unidimensional desordenado
-*/
 
 #include <iostream>
 using namespace std;
@@ -41,24 +37,25 @@ int main(void){
 	cout<<"D�gite el elemento a eliminar"<<endl;
 	cin>>elementoEliminar;
 	
-	int aux = 0;
+	int indiceAux = 0;
 	
-	while ((aux<numElementos) && (elementoEliminar != arreglo[aux])){
-        aux++;
+	while ((indiceAux<=numElementos) && (elementoEliminar != arreglo[indiceAux])){
+        indiceAux++;
     }
 
 
-    if (aux > numElementos){
+    if (indiceAux > numElementos){
         cout << "No se encontro el elemento buscado"<<endl;
     } else {
-    	
-    	for (int i = aux; i<numElementos-1; i++){
+    	for (int i = indiceAux; i<numElementos-1; i++){
     		
     		arreglo[i] = arreglo[i+1];
     		
 		}
-		
 		numElementos = numElementos-1;
+	}
+		
+		
 
 	
 	cout<<endl;
@@ -74,4 +71,4 @@ int main(void){
 	cout<<"--------------------------------------------------------------"<<endl;
 	cout<<endl;
 }
-}
+
