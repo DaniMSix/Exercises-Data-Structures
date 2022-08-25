@@ -6,7 +6,7 @@ int main(void)
 
 	int numElementos;
 
-	cout << "D�gite el n�mero de elementos a ingresar" << endl;
+	cout << "Dígite el número de elementos a ingresar" << endl;
 	cin >> numElementos;
 
 	int arreglo[numElementos];
