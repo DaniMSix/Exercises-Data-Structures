@@ -1,18 +1,20 @@
 #include <iostream>
+#include <vector>
 using namespace std;
+using std::vector;
 
 int indexAuxiliar = 0;
-
-void writeArray(int numberOfElements, int array[])
+int element;
+int writeArray(int indexArray, vector<int> array[])
 {
-    if (numberOfElements == indexAuxiliar)
+    if (indexArray == array->size())
     {
-        cout << array[numberOfElements];
+        cout << array[indexArray];
     }
     else
     {
-        cout << array[numberOfElements] << " | ";
-        writeArray(numberOfElements - 1, array);
+        cout << array[indexArray] << " | ";
+        writeArray(indexArray - 1, array);
     }
 }
 
@@ -22,7 +24,8 @@ int main()
     cout << "Type the number of elements to enter" << endl;
     cin >> numberOfElements;
 
-    int array[numberOfElements], element;
+    vector<int> array;
+    int element;
 
     for (int indexArray = 0; indexArray < numberOfElements; indexArray++)
     {
@@ -30,5 +33,5 @@ int main()
         cin >> element;
         array[indexArray] = element;
     }
-    writeArray(numberOfElements - 1, array);
+    cout << writeArray(0, array);
 }
