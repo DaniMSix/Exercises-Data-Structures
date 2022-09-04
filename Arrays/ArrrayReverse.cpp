@@ -1,49 +1,32 @@
 #include <iostream>
-
 using namespace std;
 
-int main(){
-    int indexArrayNormal;
-    
-    
-    cout<<"Enter the number of array elements"<<endl;
-    cin>>indexArrayNormal;
-    
-    int arrayNormal[indexArrayNormal];
-    
-    
-    
-    
-    int element;
-    
-    for (int i= 0; i< indexArrayNormal; i++){
-    	
-    	cout<<"Inserte el elemento número: "<<endl;
-        cin>>element;
-        arrayNormal[i]= element;
+void arrayReverse(int arrayNormal[], int indexArrayNormal)
+{
+    int arrayReverse[indexArrayNormal];
+    for (int indexArrayReverse = indexArrayNormal - 1; indexArrayReverse >= 0; indexArrayReverse--)
+    {
+        cout << arrayNormal[indexArrayReverse] << " | ";
     }
-    
-    // Reverse of array
-    
-    int indexArrayReverse = 0;
-    
-    while (indexArrayNormal>indexArrayReverse){
-        
-        int elementAux;
-        
-        arrayNormal[indexArrayNormal] = elementAux;
-        arrayReverse[indexArrayReverse] = elementAux;
-        
-        indexArrayNormal--;
-        
-    }
-    
-    for (int i=0; i<indexArrayReverse;i++){
-    	cout<<"-----------------------------------"<<endl;
-    	cout<<"-- "<<endl;
-    	cout<<arrayReverse[i];
-	}
-
 }
 
+int main()
+{
+    int indexArray;
 
+    cout << "Enter the number of array elements" << endl;
+    cin >> indexArray;
+
+    int arrayNormal[indexArray];
+
+    int element;
+
+    for (int numberOfElement = 0; numberOfElement < indexArray; numberOfElement++)
+    {
+        cout << "Insert the element number " << numberOfElement << " :" << endl;
+        cin >> element;
+        arrayNormal[numberOfElement] = element;
+    }
+
+    arrayReverse(arrayNormal, indexArray);
+}
