@@ -2,29 +2,31 @@
 #include <conio.h>
 #include <cstdlib>
 #include <string.h>
+#include <iostream> 
 using namespace std;
 
-void sortCharacters(char *chain, int size)
+void sortCharacters(char *chain, int nElementos, char* paux)
 {
-    int i;
-    bool flag = true;
-    int temp;
-    while (flag)
-    {
-        flag = false;
-        for (int index = 0; index < sizeof(*chain) - 1; i++)
+    
+    int aux;  
+        for(int index=0;  index < nElementos;  index++ )
         {
-            if (*(chain) >= 97 && *(chain) <= 122)
-            {
-                temp = chain[i];
-                num[index] = num[index + 1];
-                num[i + 1] = temp;
-                flag = true;
-            }
-        }
-    }
-    return num;
-}
+            for(int j=0;j<nElementos -1;j++){
+			
+                if (*(chain+j)>*(chain+j+1))  
+                {
+                    aux = *(chain+j);
+                    *(chain+j)=*(chain+j+1);
+                    *(chain+j+1)=aux;
+                } 
+            } 
+		}
+	cout<<"Arreglo ordenado\n";
+	for(int i=0;i<nElementos;i++){
+		cout<<*(chain+1)<<" | ";
+	}
+}   
+
 
 int main()
 {
@@ -32,13 +34,12 @@ int main()
     char *paux;
     puts("introduzca la cadena a convertir: ");
     gets(p);
-
-    /* p apunta al primer carácter de la cadena */
-    // p = &CadenaTexto[0]
-
+    
+    int nElementos = strlen(p);
+    
     paux = p;
 
-    // Repetir mientras *p no sea cero
+    
 
     while (*(p) != '\0')
     {
@@ -49,20 +50,13 @@ int main()
 
         p++;
     }
-    // Calculamos la longitud de la cadena
-    int size;
-    while (*p)
-    {
-        size++;
-        p++;
-    }
-
-    // Convertimos la cadena a mayuscula y después ordenamos
-    //  puts("La cadena convertida es : ");
-    //   Utiliza paux para imprimir el inicio de la cadena
+    
     puts(paux);
-
+    int size;
+    
     // Ordenamos la cadena
+    sortCharacters(p, nElementos, paux);
+    
 
     getch();
 
