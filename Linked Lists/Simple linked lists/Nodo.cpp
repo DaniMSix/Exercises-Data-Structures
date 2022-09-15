@@ -80,6 +80,7 @@ Lista::~Lista(){
     }
 
     void Lista::buscarElemento(int elementoBuscado){
+        
         if (estaVacia()){
             cout<<"No existen elementos en la lista\n";
             system("pause");
