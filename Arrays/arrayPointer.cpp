@@ -18,3 +18,15 @@ int longitud(char *cad)
         cuenta++;
     return cuenta;
 }
+
+i=0
+while(*(p+j) != '\0')
+i(*(p+j)<*(p+i))
+t= *(p+i)
+*(p+i) = *(p+j)
+*(p+j) = t
+
+}
+j++
+}
+i++
