@@ -57,27 +57,28 @@ void Lista::insertarAlInicio(int valor){
     } else {
         nuevoPtr -> siguientePtr = primeroPtr;
     }
-        primeroPtr = nuevoPtr;
+
+    primeroPtr = nuevoPtr;
 }
 
 void Lista::insertaAlFinal(int elementoInsertarAlFinal){
 
     Nodo *nuevoPtr = new Nodo();
     nuevoPtr -> datos = elementoInsertarAlFinal;
+    nuevoPtr -> siguientePtr = NULL;
 
-    if (estaVacia()){
-        nuevoPtr ->siguientePtr = NULL;
-    } else {
+    bool elementoEncontrado = false;
+
+    if (primeroPtr == NULL){
+        primeroPtr = nuevoPtr;
+    } else { 
         Nodo *actualPtr = primeroPtr;
-        bool elementoInsertado = false;
-        while (actualPtr != NULL && elementoInsertado == false){
-            if (actualPtr == NULL ){
-                nuevoPtr -> siguientePtr = NULL;
-                elementoInsertado = true;
-            }
-
-            actualPtr = actualPtr -> siguientePtr;
+        
+        while(actualPtr -> siguientePtr != NULL){
+            actualPtr -> siguientePtr = actualPtr;
         }
+
+        actualPtr -> siguientePtr = nuevoPtr;
     }
 
 }
@@ -149,14 +150,25 @@ void Lista::eliminarElemento(int elementoEliminar){
         return;
     }
 
-   Nodo *actualPtr = primeroPtr;
+    Nodo *actualPtr = primeroPtr;
 
-    bool elementoEliminado = false;
-    while (actualPtr != NULL ){
-        if (actualPtr -> datos== elementoEliminar){
+    //bool elementoEliminado = false;
+    //while (actualPtr != NULL ){
+    //    if (actualPtr -> datos== elementoEliminar){
         //    eliminarPtr -> siguientePtr;
-        } else {
+    //    } else {
         //    eliminarPtr = eliminarPtr -> siguientePtr;
+    //    }
+    //}
+    // nuevoPtr -> datos = valor;
+
+    bool elementoEncontrado = false;
+    while((actualPtr != NULL) && elementoEncontrado == false){
+        if ((actualPtr -> datos) == elementoEliminar ){
+            
+            elementoEncontrado=true;
+        } else {
+            actualPtr = actualPtr -> siguientePtr;
         }
     }
 }
