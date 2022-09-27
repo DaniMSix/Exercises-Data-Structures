@@ -21,9 +21,11 @@ public:
     void recorreIterativo();
     void buscarElemento(int elementoBuscado);
     void insertaAlFinal(int elementoInsertarFinal);
-    void eliminarElemento(int elementoEliminar);
+    void eliminarPrimero();
     void eliminarElementosDuplicados();
     void insertarAntes(int valor, int referencia);
+    void eliminarNodo(int referencia);
+    void eliminarUltimoNodo();
 };
 
 bool Lista::estaVacia()
@@ -169,42 +171,61 @@ void Lista::buscarElemento(int elementoBuscado)
 
 // CORREGIR MÉTODO
 
-void Lista::eliminarElemento(int elementoEliminar)
+void Lista::eliminarPrimero()
 {
 
-    if (!estaVacia())
+    if (estaVacia())
     {
-        Nodo *auxBorrarPtr;
-        Nodo *anteriorPtr = NULL;
-
-        auxBorrarPtr = primeroPtr;
-
-        while ((auxBorrarPtr != NULL) && ((auxBorrarPtr->datos) != elementoEliminar))
-        {
-            anteriorPtr = auxBorrarPtr;
-            auxBorrarPtr = auxBorrarPtr->siguientePtr;
-        }
-
-        // auxBorrarPtr -> siguientePtr = auxBorrarPtr;
-        // anteriorPtr ->siguientePtr = auxBorrarPtr;
+        cout << "\nLa lista esta vacía\n\n ";
     }
-    /*
-        while((auxBorrar != NULL) && elementoEncontrado == false){
-            if ((actualPtr -> datos) == elementoEliminar ){
-                tempPtr = auxBorrar;
-                elementoEncontrado=true;
-            } else {
-                auxBorrar = auxBorrar -> siguientePtr;
-            }
-        }
 
-        actualPtr -> siguientePtr;
-        delete tempPtr;
-    */
+    cout << "\nDestruyendo el nodo: " << primeroPtr->datos << "\n";
+    Nodo *tempPtr = primeroPtr;
+    primeroPtr = primeroPtr->siguientePtr;
+    delete tempPtr;
 }
 
 void Lista::eliminarElementosDuplicados()
 {
+}
+
+void Lista::eliminarNodo(int referencia)
+{
+    if (estaVacia())
+    {
+        cout << "\nEl nodo dado como referencia no se encuentra en la lista.\n";
+        return;
+    }
+
+    Nodo *actualPtr = primeroPtr;
+    Nodo *previoPtr;
+
+    while (actualPtr->datos != referencia && actualPtr->siguientePtr != NULL)
+    {
+        previoPtr = actualPtr;
+        actualPtr = actualPtr->siguientePtr;
+    }
+
+    if (actualPtr->datos == referencia)
+    {
+        Nodo *tempPtr = actualPtr;
+
+        if (primeroPtr == actualPtr)
+        {
+            primeroPtr = primeroPtr->siguientePtr;
+        }
+        else
+        {
+            previoPtr->siguientePtr = actualPtr->siguientePtr;
+        }
+
+        cout << "\nDestruyendo el nodo: " << tempPtr->datos << "\n";
+        delete tempPtr;
+    }
+    else
+    {
+        cout << "\n El nodo dado como referencia no se encuentra en la lista.\n";
+    }
 }
 
 void Lista::insertarAntes(int valor, int referencia)
@@ -228,7 +249,7 @@ void Lista::insertarAntes(int valor, int referencia)
 
     while ((actualPtr->datos != referencia) && (valorEncontrado == false))
     {
-        if (actualPtr ->siguientePtr!= NULL)
+        if (actualPtr->siguientePtr != NULL)
         {
             anteriorPtr = actualPtr;
             actualPtr = actualPtr->siguientePtr;
@@ -239,8 +260,9 @@ void Lista::insertarAntes(int valor, int referencia)
         }
     }
 
-    if (valorEncontrado == false){
-    
+    if (valorEncontrado == false)
+    {
+
         if (primeroPtr == actualPtr)
         {
             nuevoPtr->siguientePtr = primeroPtr;
@@ -255,6 +277,38 @@ void Lista::insertarAntes(int valor, int referencia)
     }
 }
 
+void Lista::eliminarUltimoNodo()
+{
+
+    if (estaVacia())
+    {
+        cout << "La lista está vacía\n";
+        system("pause");
+        return;
+    }
+
+    Nodo *actualPtr = primeroPtr;
+    Nodo *anteriorPtr;
+
+    while (actualPtr != NULL)
+    {
+        anteriorPtr = actualPtr;
+        actualPtr->siguientePtr = actualPtr;
+    }
+
+    if (actualPtr = primeroPtr)
+    {
+        primeroPtr->siguientePtr = NULL;
+        delete actualPtr;
+    }
+    else
+    {
+        anteriorPtr->siguientePtr = NULL;
+        delete actualPtr;
+    }
+}
+// Insertar después
+
 void menu()
 {
 
@@ -264,10 +318,10 @@ void menu()
     cout << "[2] Imprimir los valores de la lista \n";
     cout << "[3] Insertar elemento al final de la lista\n";
     cout << "[4] Buscar elemento \n";
-    cout << "[5] Eliminar elemento de la lista\n";
-    //    cout<<"[6] Eliminar elementos duplicados\n";
+    cout << "[5] Eliminar primero\n";
     cout << "[6] Insertar antes\n";
-    cout << "[7] SALIR \n";
+    cout << "[7] Eliminar nodo \n";
+    cout << "[8] Eliminar último nodo\n";
     cout << "\nIngrese una opcion : ";
 }
 
@@ -310,10 +364,8 @@ int main()
             listaEnteros.buscarElemento(elementoBuscado);
             break;
         case 5:
-            int elementoEliminar;
-            cout << "Ingrese el elemento a eliminar\n";
-            cin >> elementoEliminar;
-            listaEnteros.eliminarElemento(elementoEliminar);
+
+            listaEnteros.eliminarPrimero();
             listaEnteros.recorreIterativo();
             break;
         case 6:
@@ -324,6 +376,17 @@ int main()
             cin >> referencia;
 
             listaEnteros.insertarAntes(valor, referencia);
+            listaEnteros.recorreIterativo();
+            break;
+        case 7:
+            int valorEliminar;
+            cout << "Ingrese el valor a eliminar\n";
+            cin >> valorEliminar;
+            listaEnteros.eliminarNodo(valorEliminar);
+            listaEnteros.recorreIterativo();
+            break;
+        case 8:
+            listaEnteros.eliminarUltimoNodo();
             listaEnteros.recorreIterativo();
             break;
         }
