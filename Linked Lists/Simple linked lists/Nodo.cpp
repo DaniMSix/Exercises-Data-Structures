@@ -26,6 +26,7 @@ public:
     void insertarAntes(int valor, int referencia);
     void eliminarNodo(int referencia);
     void eliminarUltimoNodo();
+    void insertarDespues(int valor, int referencia);
 };
 
 bool Lista::estaVacia()
@@ -260,7 +261,7 @@ void Lista::insertarAntes(int valor, int referencia)
         }
     }
 
-    if (valorEncontrado == false)
+    if (valorEncontrado)
     {
 
         if (primeroPtr == actualPtr)
@@ -282,7 +283,7 @@ void Lista::eliminarUltimoNodo()
 
     if (estaVacia())
     {
-        cout << "La lista está vacía\n";
+        // cout << "La lista está vacía\n";
         system("pause");
         return;
     }
@@ -290,21 +291,64 @@ void Lista::eliminarUltimoNodo()
     Nodo *actualPtr = primeroPtr;
     Nodo *anteriorPtr;
 
-    while (actualPtr != NULL)
+    while (actualPtr->siguientePtr != NULL)
     {
         anteriorPtr = actualPtr;
-        actualPtr->siguientePtr = actualPtr;
+        actualPtr = actualPtr->siguientePtr;
     }
+
+    Nodo *auxPtr = actualPtr;
 
     if (actualPtr = primeroPtr)
     {
-        primeroPtr->siguientePtr = NULL;
-        delete actualPtr;
+        primeroPtr = NULL;
+        cout << "Nodo eliminado\n";
     }
     else
     {
         anteriorPtr->siguientePtr = NULL;
-        delete actualPtr;
+    }
+
+    cout << "Nodo eliminado:" << auxPtr->datos;
+    delete auxPtr;
+}
+
+void Lista::insertarDespues(int valor, int referencia)
+{
+    Nodo *nuevoPtr = new Nodo();
+    nuevoPtr->datos = valor;
+
+    Nodo *actualPtr = primeroPtr;
+    bool valorEncontrado = false;
+
+    while (actualPtr->datos != referencia && valorEncontrado == false)
+    {
+        if (actualPtr != NULL && actualPtr->datos != referencia)
+        {
+            actualPtr->siguientePtr = actualPtr;
+        }
+        else
+        {
+            valorEncontrado = true;
+        }
+    }
+
+    if (valorEncontrado)
+    {
+        if (actualPtr == primeroPtr)
+        {
+        }
+        else
+        {
+            Nodo *auxPtr;
+            actualPtr->siguientePtr = auxPtr;
+            actualPtr->siguientePtr = nuevoPtr;
+            nuevoPtr->siguientePtr = auxPtr;
+        }
+    }
+    else
+    {
+        cout << "Valor no encontrado\n";
     }
 }
 // Insertar después
@@ -322,6 +366,7 @@ void menu()
     cout << "[6] Insertar antes\n";
     cout << "[7] Eliminar nodo \n";
     cout << "[8] Eliminar último nodo\n";
+    cout << "[9] Insertar antes\n";
     cout << "\nIngrese una opcion : ";
 }
 
@@ -364,7 +409,6 @@ int main()
             listaEnteros.buscarElemento(elementoBuscado);
             break;
         case 5:
-
             listaEnteros.eliminarPrimero();
             listaEnteros.recorreIterativo();
             break;
@@ -374,7 +418,6 @@ int main()
             cin >> valor;
             cout << "\nIngrese el valor de referencia\n";
             cin >> referencia;
-
             listaEnteros.insertarAntes(valor, referencia);
             listaEnteros.recorreIterativo();
             break;
@@ -389,6 +432,14 @@ int main()
             listaEnteros.eliminarUltimoNodo();
             listaEnteros.recorreIterativo();
             break;
+        case 9:
+            int valor2, referencia2;
+            cout << "Ingrese el nuevo valor\n";
+            cin >> valor;
+            cout << "Ingrese la referencia\n";
+            cin >> referencia;
+            listaEnteros.insertarAntes(valor2, referencia2);
+            listaEnteros.recorreIterativo();
         }
     } while (opcion != 10);
     return 0;
